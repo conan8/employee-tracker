@@ -20,6 +20,43 @@
 		
 		<div id="container">
 			<div id="content">
+			
+				<input type=button value="Add Employee" 
+					onclick="window.location.href='add-employee-form.jsp'; return false;"
+					class="add-student-button"
+				/>
+				
+				<br>
+				
+				<c:choose>
+					<c:when test = "${update == 1}">
+			        	New employee not added - similar one was discovered on the list.
+			        	<br>
+			        	Fullname: ${fullname}
+			        	<br>
+			        	Approximate matches: ${approximate_matches_list}
+			        </c:when>
+			         
+			        <c:when test = "${update == 2}">
+			        	-
+			        </c:when>
+			        
+			        <c:when test = "${update == 3}">
+			        	New employee was not found on the list and added succesfully.
+			        </c:when>
+			        
+			        <c:when test = "${update == 4}">
+			        	-
+			        </c:when>
+			         	
+			        <c:otherwise>
+			        	No update.
+			        </c:otherwise>
+				</c:choose>
+				
+				<br>
+				<br>
+			
 				<table>
 					<tr>
 						<th>FIRST NAME</th>
@@ -27,17 +64,13 @@
 						<th>EMAIL</th>
 					</tr>
 					
-					<c:forEach var="employee" items="${employee_list}">
-										
-					<tr>
-						<td> ${employee.firstname}</td>
-						<td> ${employee.lastname} </td>
-						<td> ${employee.email}</td>
-					</tr>
-					
-					</c:forEach>
-					
-					
+					<c:forEach var="employee" items="${employee_list}">									
+						<tr>
+							<td> ${employee.firstname}</td>
+							<td> ${employee.lastname} </td>
+							<td> ${employee.email}</td>
+						</tr>				
+					</c:forEach>										
 				</table>
 			</div>
 		</div>
