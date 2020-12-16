@@ -26,6 +26,11 @@
 					class="add-student-button"
 				/>
 				
+				<input type=button value="Remove Employee" 
+					onclick="window.location.href='remove-employee-form.jsp'; return false;"
+					class="add-student-button"
+				/>
+				
 				<br>
 				
 				<c:choose>
@@ -38,7 +43,11 @@
 			        </c:when>
 			         
 			        <c:when test = "${update == 2}">
-			        	-
+			        	Found employee or approximate employee - and removed succesfully.
+			        	<br>
+			        	Email: ${email}
+			        	<br>
+			        	Approximate matches: ${approximate_matches_list}
 			        </c:when>
 			        
 			        <c:when test = "${update == 3}">
@@ -46,7 +55,7 @@
 			        </c:when>
 			        
 			        <c:when test = "${update == 4}">
-			        	-
+			        	Employee or approximate one not found on the list and not removed.
 			        </c:when>
 			         	
 			        <c:otherwise>

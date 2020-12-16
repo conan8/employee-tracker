@@ -57,6 +57,9 @@ public class EmployeeControllerServlet extends HttpServlet {
 					break;
 				case "ADD":
 					addEmployee(request, response);
+					break;					
+				case "REMOVE":
+					removeEmployee(request, response);
 					break;
 				default:
 					listEmployees(request, response);
@@ -96,6 +99,24 @@ public class EmployeeControllerServlet extends HttpServlet {
 			request.setAttribute("fullname", fullname);
 			request.setAttribute("approximate_matches_list", approximateMatches);
 			request.setAttribute("update", UPDATE_ADD_MATCH);
+		}
+		
+		listEmployees(request, response);
+	}
+	
+	private void removeEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String email = request.getParameter("email");
+		
+		// approximate check before removing employee
+		List<String> approximateMatches =  matcher.verify(email, employeeData.getEmails());
+		
+		if(null == approximateMatches || approximateMatches.size() == 0) {
+			request.setAttribute("update", UPDATE_REMOVE_NO_MATCH);
+		} else {
+			employeeData.removeEmployee(email, approximateMatches);
+			request.setAttribute("email", email);
+			request.setAttribute("approximate_matches_list", approximateMatches);
+			request.setAttribute("update", UPDATE_REMOVE_MATCH);
 		}
 		
 		listEmployees(request, response);

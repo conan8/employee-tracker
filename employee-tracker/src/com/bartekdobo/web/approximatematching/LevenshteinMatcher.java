@@ -3,7 +3,6 @@ package com.bartekdobo.web.approximatematching;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
 public class LevenshteinMatcher extends ApproximateMatcher {
@@ -27,11 +26,7 @@ public class LevenshteinMatcher extends ApproximateMatcher {
 			return null;
 		}
 
-		for(String candidate : listOfNames) {
-			
-			// int j =  dist.apply(pattern, candidate);
-			// int i =  dist.getThreshold();
-			
+		for(String candidate : listOfNames) {		
 			if(dist.apply(pattern, candidate) <= THRESHOLD) {
 				candidates.add(candidate);
 			}

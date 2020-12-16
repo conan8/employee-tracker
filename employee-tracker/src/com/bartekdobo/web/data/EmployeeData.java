@@ -44,6 +44,18 @@ public class EmployeeData {
 		employees.add(newEmployee);
 	}
 	
+	public void removeEmployee(String email) {							
+		employees.removeIf((Employee e) -> e.getEmail().equals(email) );
+	}
+	
+	public void removeEmployee(String email, List<String> approximateMatches) {
+		removeEmployee(email);
+		
+		for(String em : approximateMatches) {
+			removeEmployee(em);
+		}
+	}
+	
 	public List<String> getFullNames() {
 		List<String> fullNames = new ArrayList<>();
 		
@@ -52,6 +64,16 @@ public class EmployeeData {
 		}
 		
 		return fullNames;
+	}
+	
+	public List<String> getEmails() {
+		List<String> emails = new ArrayList<>();
+		
+		for (Employee e : employees) {
+			emails.add(e.getEmail());
+		}
+		
+		return emails;
 	}
 
 }
